@@ -15,7 +15,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "-~aO;| F;rE[??/w^zcumh(9")
 # SECURITY WARNING: don't run with debug turned on in production!
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get('ENV') == 'PRODUCTION':
-    DEBUG = False
+    DEBUG = True
 else:
     DEBUG = True
 
@@ -25,7 +25,6 @@ else:
     ALLOWED_HOSTS = ["127.0.0.1"]
 
 if os.environ.get('ENV') == 'PRODUCTION':
-
     # Static files settings
     PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
