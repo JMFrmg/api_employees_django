@@ -3,26 +3,31 @@ from employees.models import Employee, Department
 from django.contrib.auth.models import User
 
 
+# Serializer des object Employee
 class EmployeeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Employee
-        fields = ["id", "first_name", "last_name", "full_name", "hired", "current", "age", "city", "position", "salary", "department"]
+        # liste des champs :
+        exclude = ['owner']
+        #fields = ["id", "first_name", "last_name", "full_name", "hired", "current", "age", "city", "position", "salary", "department"]
 
+    # On surcharge la méthode create de base :
     def create(self, validated_data):
         employee = Employee.objects.create(**validated_data)
         return employee
 
+# Serializer des objets Department
 class DepartmentSerializer(serializers.ModelSerializer):
-    employees = EmployeeSerializer(many=True)
+    #employees = EmployeeSerializer(many=True)
 
     class Meta:
         model = Department
-        fields = ['id', 'name', 'floor', 'employees']
+        fields = "__all__"
+        #fields = ['id', 'name', 'floor', 'employees']
 
     def create(self, validated_data):
-        employees_data = validated_data.pop('employees')
+        print(validated_data)
         department = Department.objects.create(**validated_data)
-        for employee_data in employees_data:
-            Employee.objects.create(department=department, **employee_data)
         return department
+
