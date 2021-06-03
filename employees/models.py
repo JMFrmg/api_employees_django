@@ -15,7 +15,7 @@ class Employee(models.Model):
     age = models.SmallIntegerField(default=30)
     city = models.CharField(max_length=200, default="paris")
     position = models.CharField(max_length=200, default="cadre")
-    salary = models.SmallIntegerField(default=30000)
+    salary = models.IntegerField(default=30000)
     current = models.BooleanField(default=True)
     department = models.ForeignKey(Department, related_name="employees", on_delete=models.RESTRICT)
     owner = models.ForeignKey("auth.User", related_name="employees", on_delete=models.CASCADE)
