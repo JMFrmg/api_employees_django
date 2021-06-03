@@ -49,13 +49,14 @@ def populate(request):
     from random import randint
 
     df = pd.read_csv("employees/full_names.csv")
+    all_departments = Department.objects.all()
+    all_users = User.objects.all()
     for r in df.iterrows():
-        print(r[1][0], r[1][1])
-        all_departments = Department.objects.all()
-        all_users = User.objects.all()
         cities = ["Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Montpellier", "Strasbourg", "Bordeaux"]
         positions = ["employé", "cadre", "cadre sup", "dirigeant"]
-        while True:
+        n = 0
+        while n < 5:
+            try:
                 new_employee = Employee(first_name=r[1][0],
                                         last_name=r[1][1],
                                         current=True,
@@ -67,4 +68,7 @@ def populate(request):
                                         department_chief=all_users[randint(0, len(all_users)-1)])
                 new_employee.save()
                 break
+            except:
+                n += 1
+                continue
     print(df.shape)
