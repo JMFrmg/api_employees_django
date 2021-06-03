@@ -18,7 +18,7 @@ class Employee(models.Model):
     salary = models.SmallIntegerField(default=30000)
     current = models.BooleanField(default=True)
     department = models.ForeignKey(Department, related_name="employees", on_delete=models.RESTRICT)
-    department_chief = models.ForeignKey("auth.User", related_name="employees", on_delete=models.CASCADE)
+    owner = models.ForeignKey("auth.User", related_name="employees", on_delete=models.CASCADE)
 
     def full_name(self):
         return '%s %s' % (self.first_name.capitalize(), self.last_name.capitalize())

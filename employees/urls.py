@@ -19,7 +19,6 @@ from employees import views
 router = DefaultRouter()
 router.register(r'employees', views.EmployeeViewSet)
 router.register(r'departments', views.DepartmentViewSet)
-router.register(r'users', views.UserViewSet)
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
