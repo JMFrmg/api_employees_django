@@ -15,11 +15,11 @@ SECRET_KEY = 'django-insecure-#3=ph*h3-f=()0bmmq--1u(xlfb*8lv=m!oin856gkj=kt(0c9
 # SECURITY WARNING: don't run with debug turned on in production!
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get('ENV') == 'PRODUCTION':
-    DEBUG = False
+    DEBUG = True
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ["frozen-tor-79057.herokuapp.com"]
+ALLOWED_HOSTS = ["frozen-tor-79057.herokuapp.com", "127.0.0.1"]
 
 if os.environ.get('ENV') == 'PRODUCTION':
 
