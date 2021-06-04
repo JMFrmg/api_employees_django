@@ -13,9 +13,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "-~aO;| F;rE[??/w^zcumh(9")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get('ENV') == 'PRODUCTION':
-    DEBUG = True
+    DEBUG = False
 else:
     DEBUG = True
 
@@ -97,6 +96,10 @@ DATABASES = {
     }
 }
 
+# Modification de la BDD par défaut si l'application est en production
+# Heroku crée une BDD Postgresql sur AWS
+# Les information de connexion sont stockées dans une variable d'environnement
+# Cette dernière est facilement accessible avec l'objet dj_database_url (importé en haut du fichier)
 if os.environ.get('ENV') == 'PRODUCTION':
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
@@ -120,6 +123,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# L'ensemble des paramètres globaux du Framework Django Rest sont à insérer dans la variable globale REST_FRAMEWORK
+# Ici j'ai juste modifié la pagination par défaut pour obtenir 10 résultats max par page
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
@@ -130,7 +135,7 @@ REST_FRAMEWORK = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Paris'
 
 USE_I18N = True
 

@@ -12,7 +12,7 @@ from django.http import HttpResponse
 # pour récupérer l'ensemble des entrées d'une table et les renvoyer au template :
 # def get_employees(request):
 #     employees = Employee.objects.all()
-#     return render(request, <mon_template>, employees)
+#     return render(request, <mon_template>, context={"employees"=employees})
 # pour supprimer une entrée dans la BDD :
 # def rm_employee(request, id):
 #     employee = Employee.objects.get(pk=id)
@@ -35,6 +35,10 @@ class DepartmentViewSet(viewsets.ModelViewSet):
 
 # vue qui permet de peupler la BDD
 # url : http://<mon_url>/populate
+# L'utilisation de la fonction nécessite d'être authentifié en tant que super utilisateur
+# Les noms ont été scrappés à l'adresse url suivante :https://mescanefeux.com/452
+# Puis stockée dans le fichier csv employees/full_names.csv
+# Toutes les autres infos sont affectées aléatoirement à chaque employé avec romdom.randint
 def populate(request):
     if request.user.is_superuser:
         import pandas as pd

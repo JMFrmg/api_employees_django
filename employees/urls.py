@@ -23,5 +23,5 @@ router.register(r'departments', views.DepartmentViewSet)
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
     path("", include(router.urls)),
-    path("populate/", views.populate, name="populate")
+    path("populate/", views.populate, name="populate")#url de peuplement de la BDD
 ]
